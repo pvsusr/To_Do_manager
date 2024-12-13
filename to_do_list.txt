@@ -1,0 +1,77 @@
+class TaskModel:
+    """Model: Manages the data and business logic."""
+    def __init__(self):
+        self.tasks = []
+	
+    def add_task(self, task):
+        self.tasks.append(task)
+
+    def remove_task(self, task):
+        if task in self.tasks:
+            self.tasks.remove(task)
+
+    def get_tasks(self):
+        return self.tasks
+
+class TaskView:
+    """View: Displays the data to the user."""
+    @staticmethod
+    def show_tasks(tasks):
+        if not tasks:
+            print("No tasks available.")
+        else:
+            print("Your tasks:")
+            for i, task in enumerate(tasks, 1):
+                print(f"{i}. {task}")
+
+@staticmethod
+    def show_message(message):
+        print(message)
+
+class TaskController:
+    """Controller: Handles user input and updates Model and View."""
+    def __init__(self, model, view):
+        self.model = model
+        self.view = view
+
+    def add_task(self, task):
+        self.model.add_task(task)
+        self.view.show_message(f"Task '{task}' added successfully.")
+ 
+def remove_task(self, task):
+        if task in self.model.get_tasks():
+            self.model.remove_task(task)
+            self.view.show_message(f"Task '{task}' removed successfully.")
+        else:
+            self.view.show_message(f"Task '{task}' not found.")
+
+    def show_tasks(self):
+        tasks = self.model.get_tasks()
+        self.view.show_tasks(tasks)
+
+# Main application
+def main():
+    model = TaskModel()
+    view = TaskView()
+    controller = TaskController(model, view)
+
+    while True:
+        print("\n1. Add Task\n2. Remove Task\n3. Show Tasks\n4. Exit")
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            task = input("Enter task to add: ")
+            controller.add_task(task)
+        elif choice == "2":
+            task = input("Enter task to remove: ")
+            controller.remove_task(task)
+        elif choice == "3":
+            controller.show_tasks()
+        elif choice == "4":
+            print("Exiting application.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
